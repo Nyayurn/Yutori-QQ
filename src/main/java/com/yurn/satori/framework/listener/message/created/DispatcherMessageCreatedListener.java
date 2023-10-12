@@ -36,7 +36,7 @@ public class DispatcherMessageCreatedListener {
     @SuppressWarnings("DuplicatedCode")
     private void onEvent(EventEntity event) {
         switch (event.getChannel().getType()) {
-            case ChannelEntiity.TEXT -> {
+            case ChannelEntity.TEXT -> {
                 GroupMessageCreatedEvent newEvent = new GroupMessageCreatedEvent();
                 initSameEvent(newEvent, event);
                 GuildEntity guild = event.getGuild();
@@ -54,7 +54,7 @@ public class DispatcherMessageCreatedListener {
                     }
                 }
             }
-            case ChannelEntiity.DIRECT -> {
+            case ChannelEntity.DIRECT -> {
                 PrivateMessageCreatedEvent newEvent = new PrivateMessageCreatedEvent();
                 initSameEvent(newEvent, event);
                 String msg = newEvent.getMessage().getContent();
