@@ -2,15 +2,17 @@ package com.yurn.satori.framework.event;
 
 import com.yurn.satori.framework.entity.event.Bot;
 import com.yurn.satori.sdk.api.MessageApi;
+import com.yurn.satori.sdk.entity.MessageEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 /**
  * @author Yurn
  */
-@SuppressWarnings("unused")
 @EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
@@ -53,8 +55,8 @@ public class UserEvent extends Event {
          */
         private Boolean isBot;
 
-        public void createMessage(String content) {
-            MessageApi.createMessage("private:" + id, content, "chronocat", bot.getId());
+        public List<MessageEntity> createMessage(String content) {
+            return MessageApi.createMessage("private:" + id, content, "chronocat", bot.getId());
         }
     }
 }

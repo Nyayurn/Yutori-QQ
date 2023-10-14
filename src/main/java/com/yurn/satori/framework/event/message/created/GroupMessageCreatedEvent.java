@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 /**
  * @author Yurn
  */
-@SuppressWarnings("unused")
 @EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor

@@ -5,7 +5,6 @@ import com.yurn.satori.framework.event.user.FriendRequestEvent;
 /**
  * @author Yurn
  */
-@SuppressWarnings("unused")
 public interface FriendRequestListener {
     /**
      * 触发事件

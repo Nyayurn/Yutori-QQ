@@ -3,18 +3,21 @@ package com.yurn.satori.framework.event.message.created;
 import com.yurn.satori.framework.entity.event.Bot;
 import com.yurn.satori.framework.entity.event.Message;
 import com.yurn.satori.framework.event.UserEvent;
+import com.yurn.satori.framework.message.element.BaseMessageElement;
 import com.yurn.satori.sdk.api.MessageApi;
-import com.yurn.satori.sdk.entity.ChannelEntiity;
+import com.yurn.satori.sdk.entity.ChannelEntity;
+import com.yurn.satori.sdk.entity.MessageEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 /**
  * @author Yurn
  */
 @EqualsAndHashCode(callSuper = true)
-@SuppressWarnings("unused")
 @Data
 @NoArgsConstructor
 public class PrivateOrGroupMessageCreatedEvent extends UserEvent {
@@ -28,10 +31,17 @@ public class PrivateOrGroupMessageCreatedEvent extends UserEvent {
      */
     protected Channel channel;
 
-    public PrivateOrGroupMessageCreatedEvent(Integer id, Long timestamp, Bot bot, User user, Message message, Channel channel) {
+    /**
+     * 消息链
+     */
+    protected List<BaseMessageElement> msgChain;
+
+    public PrivateOrGroupMessageCreatedEvent(Integer id, Long timestamp, Bot bot, User user, Message message, Channel channel,
+                                             List<BaseMessageElement> chain) {
         super(id, timestamp, bot, user);
         this.message = message;
         this.channel = channel;
+        this.msgChain = chain;
     }
 
     public void setMessage(String id, String content) {
@@ -64,12 +74,12 @@ public class PrivateOrGroupMessageCreatedEvent extends UserEvent {
          */
         protected String name;
 
-        public void createMessage(String content) {
-            switch (type) {
-                case ChannelEntiity.TEXT -> MessageApi.createMessage(id, content, "chronocat", bot.getId());
-                case ChannelEntiity.DIRECT -> MessageApi.createMessage("private:" + id, content, "chronocat", bot.getId());
+        public List<MessageEntity> createMessage(String content) {
+            return switch (type) {
+                case ChannelEntity.TEXT -> MessageApi.createMessage(id, content, "chronocat", bot.getId());
+                case ChannelEntity.DIRECT -> MessageApi.createMessage("private:" + id, content, "chronocat", bot.getId());
                 default -> throw new IllegalStateException("Unexpected value: " + type);
-            }
+            };
         }
     }
 }

@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.yurn</groupId>
 	<artifactId>YurnQbotFramework</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>YurnQbotFramework</name>
 	<description>YurnQbotFramework</description>
 	<properties>
@@ -24,12 +24,17 @@
 		<dependency>
 			<groupId>com.yurn</groupId>
 			<artifactId>YurnSatoriFramework</artifactId>
-			<version>0.0.1</version>
+			<version>0.0.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>dom4j</groupId>
+			<artifactId>dom4j</artifactId>
+			<version>1.6.1</version>
 		</dependency>
 	</dependencies>
 </project>

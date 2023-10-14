@@ -21,7 +21,6 @@ public class DispatcherUserListener {
         GlobalEventChannel.INSTANCE.addEvent(this::onEvent);
     }
 
-    @SuppressWarnings("DuplicatedCode")
     private void onEvent(EventEntity event) {
         if (event.getType().equals(UserEvents.FRIEND_REQUEST)) {
             FriendRequestEvent newEvent = new FriendRequestEvent();

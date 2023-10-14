@@ -1,9 +1,12 @@
 package com.yurn.satori.framework.entity.event;
 
 import com.yurn.satori.sdk.api.MessageApi;
+import com.yurn.satori.sdk.entity.MessageEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 /**
  * @author Yurn
@@ -31,11 +34,11 @@ public class Bot {
         return null;
     }
 
-    public void createGroupMessage(String id, String content) {
-        MessageApi.createMessage(id, content, "chronocat", id);
+    public List<MessageEntity> createGroupMessage(String id, String content) {
+        return MessageApi.createMessage(id, content, "chronocat", id);
     }
 
-    public void createPrivateMessage(String id, String content) {
-        MessageApi.createMessage("private:" + id, content, "chronocat", id);
+    public List<MessageEntity> createPrivateMessage(String id, String content) {
+        return MessageApi.createMessage("private:" + id, content, "chronocat", id);
     }
 }

@@ -5,7 +5,6 @@ import com.yurn.satori.framework.event.message.created.PrivateMessageCreatedEven
 /**
  * @author Yurn
  */
-@SuppressWarnings("unused")
 public interface PrivateMessageCreatedListener {
     /**
      * 触发事件

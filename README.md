@@ -35,9 +35,9 @@
 <dependency>
     <groupId>com.yurn</groupId>
     <artifactId>YurnQbotFramework</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <scope>system</scope>
-    <systemPath>${project.basedir}/lib/YurnQbotFramework-0.0.1-SNAPSHOT.jar</systemPath>
+    <systemPath>${project.basedir}/lib/YurnQbotFramework-0.0.1.jar</systemPath>
 </dependency>
 ```
 
