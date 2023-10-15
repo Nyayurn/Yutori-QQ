@@ -29,7 +29,7 @@ import java.util.List;
 @Slf4j
 public class DispatcherMessageCreatedListener {
     public DispatcherMessageCreatedListener() {
-        GlobalEventChannel.INSTANCE.addEvent(event -> {
+        GlobalEventChannel.getINSTANCE().addEvent(event -> {
             if (event.getType().equals(MessageEvents.MESSAGE_CREATED)) {
                 onEvent(event);
             }
@@ -44,20 +44,20 @@ public class DispatcherMessageCreatedListener {
                 GuildEntity guild = event.getGuild();
                 newEvent.setGuild(guild.getId(), guild.getName(), guild.getAvatar());
                 newEvent.setSenderCard(event.getMember().getName());
-                for (var listener : ListenerContainer.GROUP_MESSAGE_CREATED_LISTENER_LIST) {
+                for (var listener : ListenerContainer.getINSTANCE().GROUP_MESSAGE_CREATED_LISTENER_LIST) {
                     listener.onMessageCreated(newEvent, msg);
                 }
-                for (var listener : ListenerContainer.MESSAGE_CREATED_LISTENER_LIST) {
+                for (var listener : ListenerContainer.getINSTANCE().MESSAGE_CREATED_LISTENER_LIST) {
                     listener.onMessageCreated(newEvent, msg);
                 }
             }
             case ChannelEntity.DIRECT -> {
                 PrivateMessageCreatedEvent newEvent = new PrivateMessageCreatedEvent();
                 String msg = initSameEvent(newEvent, event);
-                for (var listener : ListenerContainer.MESSAGE_CREATED_LISTENER_LIST) {
+                for (var listener : ListenerContainer.getINSTANCE().MESSAGE_CREATED_LISTENER_LIST) {
                     listener.onMessageCreated(newEvent, msg);
                 }
-                for (var listener : ListenerContainer.PRIVATE_MESSAGE_CREATED_LISTENER_LIST) {
+                for (var listener : ListenerContainer.getINSTANCE().PRIVATE_MESSAGE_CREATED_LISTENER_LIST) {
                     listener.onMessageCreated(newEvent, msg);
                 }
             }

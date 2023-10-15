@@ -37,16 +37,16 @@
     <dependency>
         <groupId>com.yurn</groupId>
         <artifactId>YurnQbotFramework</artifactId>
-        <version>0.0.2</version>
+        <version>0.0.3</version>
         <scope>system</scope>
-        <systemPath>${project.basedir}/lib/YurnQbotFramework-0.0.2.jar</systemPath>
+        <systemPath>${project.basedir}/lib/YurnQbotFramework-0.0.3.jar</systemPath>
     </dependency>
     <dependency>
         <groupId>com.yurn</groupId>
         <artifactId>YurnSatoriFramework</artifactId>
-        <version>0.0.3</version>
+        <version>0.0.4-SNAPSHOT</version>
         <scope>system</scope>
-        <systemPath>${project.basedir}/lib/YurnSatoriFramework-0.0.3.jar</systemPath>
+        <systemPath>${project.basedir}/lib/YurnSatoriFramework-0.0.4-SNAPSHOT.jar</systemPath>
     </dependency>
     <!-- Http 和 WebSocket 所需依赖 -->
     <dependency>
@@ -99,7 +99,7 @@ public class Main {
 public class TestListener implements MessageCreatedListener {
     public TestListener() {
         // 通过在构造器内对 ListenerContainer 添加一个事件实现注册
-        ListenerContainer.addMessageCreatedListener(this);
+        ListenerContainer.getINSTANCE().addMessageCreatedListener(this);
     }
 
     @Override

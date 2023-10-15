@@ -8,8 +8,13 @@ import lombok.Setter;
 /**
  * @author Yurn
  */
-public class BotContainer {
+@Data
+public final class BotContainer {
     @Getter
-    @Setter
-    private static LoginEntity[] bots;
+    private static BotContainer INSTANCE = new BotContainer();
+
+    private LoginEntity[] bots;
+
+    private BotContainer() {}
 }
+

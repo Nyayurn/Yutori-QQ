@@ -11,8 +11,8 @@ import java.util.Arrays;
  */
 public class BotContainerUpdateListener {
     public BotContainerUpdateListener() {
-        GlobalEventChannel.INSTANCE.addConnect(ready -> BotContainer.setBots(
+        GlobalEventChannel.getINSTANCE().addConnect(ready -> BotContainer.getINSTANCE().setBots(
                 Arrays.stream(ready.getLogins()).filter(login -> "chronocat".equals(login.getPlatform())).toArray(LoginEntity[]::new)));
-        GlobalEventChannel.INSTANCE.addDisconnect(s -> BotContainer.setBots(null));
+        GlobalEventChannel.getINSTANCE().addDisconnect(s -> BotContainer.getINSTANCE().setBots(null));
     }
 }
