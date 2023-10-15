@@ -39,6 +39,13 @@
         <artifactId>YurnQbotFramework</artifactId>
         <version>0.0.2</version>
         <scope>system</scope>
+        <systemPath>${project.basedir}/lib/YurnQbotFramework-0.0.2.jar</systemPath>
+    </dependency>
+    <dependency>
+        <groupId>com.yurn</groupId>
+        <artifactId>YurnSatoriFramework</artifactId>
+        <version>0.0.3</version>
+        <scope>system</scope>
         <systemPath>${project.basedir}/lib/YurnSatoriFramework-0.0.3.jar</systemPath>
     </dependency>
     <!-- Http 和 WebSocket 所需依赖 -->
