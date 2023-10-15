@@ -4,8 +4,6 @@ import com.yurn.satori.framework.message.element.BaseMessageElement;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.springframework.lang.NonNull;
-import org.springframework.lang.Nullable;
 
 /**
  * @author Yurn
@@ -29,11 +27,11 @@ public abstract class BaseResourceElement extends BaseMessageElement {
      */
     protected String timeout;
 
-    public BaseResourceElement(@NonNull String src) {
+    public BaseResourceElement(String src) {
         this(src, null, null);
     }
 
-    public BaseResourceElement(@NonNull String src, @Nullable Boolean cache, @Nullable String timeout) {
+    public BaseResourceElement(String src, Boolean cache, String timeout) {
         this.src = src;
         this.cache = cache;
         this.timeout = timeout;

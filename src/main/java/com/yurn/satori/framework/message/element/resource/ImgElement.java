@@ -1,12 +1,9 @@
 package com.yurn.satori.framework.message.element.resource;
 
+import com.yurn.satori.sdk.util.XmlUtil;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.dom4j.DocumentHelper;
-import org.dom4j.Element;
-import org.springframework.lang.NonNull;
-import org.springframework.lang.Nullable;
 
 /**
  * 图片
@@ -37,12 +34,11 @@ public class ImgElement extends BaseResourceElement {
      */
     protected String filepath;
 
-    public ImgElement(@NonNull String src) {
+    public ImgElement(String src) {
         this(src, null, null, null, null);
     }
 
-    public ImgElement(@NonNull String src, @Nullable Long width, @Nullable Long height,
-                      @Nullable Boolean isEmoji, @Nullable String filepath) {
+    public ImgElement(String src, Long width, Long height, Boolean isEmoji, String filepath) {
         super(src);
         this.width = width;
         this.height = height;
@@ -50,9 +46,7 @@ public class ImgElement extends BaseResourceElement {
         this.filepath = filepath;
     }
 
-    public ImgElement(@NonNull String src, @Nullable Boolean cache, @Nullable String timeout,
-                      @Nullable Long width, @Nullable Long height,
-                      @Nullable Boolean isEmoji, @Nullable String filepath) {
+    public ImgElement(String src, Boolean cache, String timeout, Long width, Long height, Boolean isEmoji, String filepath) {
         super(src, cache, timeout);
         this.width = width;
         this.height = height;
@@ -62,28 +56,29 @@ public class ImgElement extends BaseResourceElement {
 
     @Override
     public String toString() {
-        Element element = DocumentHelper.createElement("img");
+        String result = "<img";
         if (src != null) {
-            element.addAttribute("src", src);
+            result += " src=\"" + XmlUtil.encode(src) + "\"";
         }
         if (cache != null) {
-            element.addAttribute("cache", String.valueOf(cache));
+            result += " cache";
         }
         if (timeout != null) {
-            element.addAttribute("timeout", timeout);
+            result += " timeout=\"" + timeout + "\"";
         }
         if (width != null) {
-            element.addAttribute("width", String.valueOf(width));
+            result += " width=" + width;
         }
         if (height != null) {
-            element.addAttribute("height", String.valueOf(height));
+            result += " height=" + height;
         }
         if (isEmoji != null) {
-            element.addAttribute("chrono-unsafe-isemoji", String.valueOf(isEmoji));
+            result += " chrono-unsafe-isemoji";
         }
         if (filepath != null) {
-            element.addAttribute("chrono-unsafe-filepath", filepath);
+            result += " chrono-unsafe-filepath=\"" + XmlUtil.encode(filepath) + "\"";
         }
-        return element.asXML();
+        result += "/>";
+        return result;
     }
 }

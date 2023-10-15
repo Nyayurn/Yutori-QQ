@@ -16,7 +16,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
-public class GroupMessageCreatedEvent extends PrivateOrGroupMessageCreatedEvent {
+public class GroupMessageCreatedEvent extends MessageCreatedEvent {
     /**
      * 群组信息
      */

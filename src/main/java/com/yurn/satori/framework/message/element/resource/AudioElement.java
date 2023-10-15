@@ -1,12 +1,9 @@
 package com.yurn.satori.framework.message.element.resource;
 
+import com.yurn.satori.sdk.util.XmlUtil;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.dom4j.DocumentHelper;
-import org.dom4j.Element;
-import org.springframework.lang.NonNull;
-import org.springframework.lang.Nullable;
 
 /**
  * 语音
@@ -17,26 +14,27 @@ import org.springframework.lang.Nullable;
 @Data
 @NoArgsConstructor
 public class AudioElement extends BaseResourceElement {
-    public AudioElement(@NonNull String src) {
+    public AudioElement(String src) {
         super(src);
     }
 
-    public AudioElement(@NonNull String src, @Nullable Boolean cache, @Nullable String timeout) {
+    public AudioElement(String src, Boolean cache, String timeout) {
         super(src, cache, timeout);
     }
 
     @Override
     public String toString() {
-        Element element = DocumentHelper.createElement("audio");
+        String result = "<audio";
         if (src != null) {
-            element.addAttribute("src", src);
+            result += " src=\"" + XmlUtil.encode(src) + "\"";
         }
         if (cache != null) {
-            element.addAttribute("cache", String.valueOf(cache));
+            result += " cache";
         }
         if (timeout != null) {
-            element.addAttribute("timeout", timeout);
+            result += " timeout=\"" + timeout + "\"";
         }
-        return element.asXML();
+        result += "/>";
+        return result;
     }
 }

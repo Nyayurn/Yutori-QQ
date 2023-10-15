@@ -2,13 +2,14 @@ package com.yurn.satori.framework;
 
 import com.yurn.satori.sdk.entity.LoginEntity;
 import lombok.Data;
-import org.springframework.stereotype.Component;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * @author Yurn
  */
-@Component
-@Data
 public class BotContainer {
-    private LoginEntity[] bots;
+    @Getter
+    @Setter
+    private static LoginEntity[] bots;
 }

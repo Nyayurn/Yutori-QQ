@@ -15,7 +15,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
-public class PrivateMessageCreatedEvent extends PrivateOrGroupMessageCreatedEvent {
+public class PrivateMessageCreatedEvent extends MessageCreatedEvent {
     public PrivateMessageCreatedEvent(Integer id, Long timestamp, Bot bot, User user, Message message, Channel channel,
                                       List<BaseMessageElement> chain) {
         super(id, timestamp, bot, user, message, channel, chain);

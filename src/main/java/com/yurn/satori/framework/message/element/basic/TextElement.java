@@ -1,10 +1,10 @@
 package com.yurn.satori.framework.message.element.basic;
 
 import com.yurn.satori.framework.message.element.BaseMessageElement;
+import com.yurn.satori.sdk.util.XmlUtil;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.springframework.lang.NonNull;
 
 /**
  * 纯文本
@@ -17,17 +17,14 @@ import org.springframework.lang.NonNull;
 public class TextElement extends BaseMessageElement {
     protected String text;
 
-    public TextElement(@NonNull String text) {
+    public TextElement(String text) {
         this.text = text;
     }
 
     @Override
     public String toString() {
         if (text != null) {
-            return text.replace("&", "&amp;")
-                    .replace("\"", "&quot;")
-                    .replace("<", "&lt;")
-                    .replace(">", "&gt;");
+            return XmlUtil.encode(text);
         }
         return null;
     }

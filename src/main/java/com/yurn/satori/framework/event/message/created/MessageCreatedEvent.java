@@ -20,7 +20,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
-public class PrivateOrGroupMessageCreatedEvent extends UserEvent {
+public class MessageCreatedEvent extends UserEvent {
     /**
      * 消息信息
      */
@@ -36,7 +36,7 @@ public class PrivateOrGroupMessageCreatedEvent extends UserEvent {
      */
     protected List<BaseMessageElement> msgChain;
 
-    public PrivateOrGroupMessageCreatedEvent(Integer id, Long timestamp, Bot bot, User user, Message message, Channel channel,
+    public MessageCreatedEvent(Integer id, Long timestamp, Bot bot, User user, Message message, Channel channel,
                                              List<BaseMessageElement> chain) {
         super(id, timestamp, bot, user);
         this.message = message;
