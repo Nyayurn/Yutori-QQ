@@ -1,29 +1,33 @@
 package com.yurn.satori.framework.listener.user;
 
+import com.yurn.satori.framework.entity.event.Bot;
 import com.yurn.satori.framework.event.user.FriendRequestEvent;
-import com.yurn.satori.framework.listener.ListenerContainer;
-import com.yurn.satori.sdk.GlobalEventChannel;
+import com.yurn.satori.framework.listener.EventListenerContainer;
+import com.yurn.satori.sdk.ListenerContainer;
+import com.yurn.satori.sdk.api.MessageApi;
 import com.yurn.satori.sdk.entity.EventEntity;
+import com.yurn.satori.sdk.entity.PropertiesEntity;
 import com.yurn.satori.sdk.entity.events.UserEvents;
-
-import java.util.List;
 
 /**
  * @author Yurn
  */
 public class DispatcherUserListener {
+    private final PropertiesEntity properties;
+    private final EventListenerContainer listenerContainer;
 
-    public DispatcherUserListener() {
-        GlobalEventChannel.getINSTANCE().addEvent(this::onEvent);
+    public DispatcherUserListener(PropertiesEntity properties, ListenerContainer listenerContainer,
+                                  EventListenerContainer eventListenerContainer) {
+        this.properties = properties;
+        this.listenerContainer = eventListenerContainer;
+        listenerContainer.addOnEventListener(this::onEvent);
     }
 
     private void onEvent(EventEntity event) {
         if (event.getType().equals(UserEvents.FRIEND_REQUEST)) {
             FriendRequestEvent newEvent = new FriendRequestEvent();
-            List<FriendRequestListener> friendRequestListenerList = ListenerContainer.getINSTANCE().FRIEND_REQUEST_LISTENER_LIST;
-            for (var listener : friendRequestListenerList) {
-                listener.onFriendRequest(newEvent);
-            }
+            MessageApi messageApi = new MessageApi("chronocat", event.getSelfId(), properties);
+            listenerContainer.runOnFriendRequestListeners(new Bot(messageApi), newEvent);
         }
     }
 }

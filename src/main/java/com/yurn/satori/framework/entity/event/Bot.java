@@ -2,9 +2,7 @@ package com.yurn.satori.framework.entity.event;
 
 import com.yurn.satori.sdk.api.MessageApi;
 import com.yurn.satori.sdk.entity.MessageEntity;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.List;
 
@@ -12,33 +10,44 @@ import java.util.List;
  * @author Yurn
  */
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class Bot {
     /**
      * QQ 号
      */
     private String id;
 
-    /**
-     * 获取昵称
-     */
-    public String getName() {
-        return null;
+    private MessageApi messageApi;
+
+    public Bot(MessageApi messageApi) {
+        this.messageApi = messageApi;
+        this.id = messageApi.getSelfId();
     }
 
-    /**
-     * 获取头像
-     */
-    public String getAvatar() {
-        return null;
+    public List<MessageEntity> createMessage(Channel channel, String content) {
+        if (channel.getType().equals(0)) {
+            return createGroupMessage(channel.getId(), content);
+        } else {
+            return createPrivateMessage(channel.getId(), content);
+        }
+    }
+
+    public List<MessageEntity> createMessage(Guild guild, String content) {
+        return createGroupMessage(guild.getId(), content);
+    }
+
+    public List<MessageEntity> createMessage(User user, String content) {
+        return createPrivateMessage(user.getId(), content);
+    }
+
+    public List<MessageEntity> createMessage(String id, String content) {
+        return messageApi.createMessage(id, content);
     }
 
     public List<MessageEntity> createGroupMessage(String id, String content) {
-        return MessageApi.createMessage(id, content, "chronocat", id);
+        return messageApi.createMessage(id, content);
     }
 
     public List<MessageEntity> createPrivateMessage(String id, String content) {
-        return MessageApi.createMessage("private:" + id, content, "chronocat", id);
+        return messageApi.createMessage("private:" + id, content);
     }
 }

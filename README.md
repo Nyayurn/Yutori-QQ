@@ -13,8 +13,6 @@
 ## 基础信息
 
 > 提示: 本文档默认您了解并熟悉 Java 基本语法
-> 
-> 注意: 仅支持 JDK 17+
 
 ## 项目创建
 
@@ -37,16 +35,16 @@
     <dependency>
         <groupId>com.yurn</groupId>
         <artifactId>YurnQbotFramework</artifactId>
-        <version>0.0.3</version>
+        <version>0.0.4</version>
         <scope>system</scope>
-        <systemPath>${project.basedir}/lib/YurnQbotFramework-0.0.3.jar</systemPath>
+        <systemPath>${project.basedir}/lib/YurnQbotFramework-0.0.4.jar</systemPath>
     </dependency>
     <dependency>
         <groupId>com.yurn</groupId>
         <artifactId>YurnSatoriFramework</artifactId>
-        <version>0.0.4-SNAPSHOT</version>
+        <version>0.0.4-Fix</version>
         <scope>system</scope>
-        <systemPath>${project.basedir}/lib/YurnSatoriFramework-0.0.4-SNAPSHOT.jar</systemPath>
+        <systemPath>${project.basedir}/lib/YurnSatoriFramework-0.0.4-Fix.jar</systemPath>
     </dependency>
     <!-- Http 和 WebSocket 所需依赖 -->
     <dependency>
@@ -81,14 +79,21 @@
 
 ```java
 public class Main {
-    static {
+    private final EventListenerContainer listenerContainer = new EventListenerContainer();
+
+    public Main() {
         // new 一个对象以触发监听器的注册
-        new TestListener();
+        new TestListener(listenerContainer);
     }
 
-    public static void main(String[] args) {
+    private void run() {
         // 初始化核心启动类, 并运行
-        new Boot("127.0.0.1:5500", "token").run();
+        //new Boot("127.0.0.1:5500", listenerContainer).run()
+        new Boot("127.0.0.1:5500", "token", listenerContainer).run();
+    }
+    
+    public static void main(String[] args) {
+        new Main().run();
     }
 }
 ```
@@ -97,16 +102,16 @@ public class Main {
 
 ```java
 public class TestListener implements MessageCreatedListener {
-    public TestListener() {
+    public TestListener(EventListenerContainer eventListenerContainer) {
         // 通过在构造器内对 ListenerContainer 添加一个事件实现注册
-        ListenerContainer.getINSTANCE().addMessageCreatedListener(this);
+        eventListenerContainer.addOnMessageCreatedListener(this);
     }
 
     @Override
-    public void onMessageCreated(MessageCreatedEvent event, String msg) {
+    public void onMessageCreated(Bot bot, MessageCreatedEvent event, String msg) {
         if ("test".equals(msg)) {
-            // 通过 event 获取 channel 对象, 并往该 channel 发送一条消息
-            event.getChannel().createMessage("test done!");
+            // 通过 bot 对象创建消息
+            bot.createMessage(event.getChannel(), "test done!");
         }
     }
 }

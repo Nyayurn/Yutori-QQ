@@ -1,14 +1,9 @@
 package com.yurn.satori.framework.event;
 
-import com.yurn.satori.framework.entity.event.Bot;
-import com.yurn.satori.sdk.api.MessageApi;
-import com.yurn.satori.sdk.entity.MessageEntity;
-import lombok.AllArgsConstructor;
+import com.yurn.satori.framework.entity.event.User;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 /**
  * @author Yurn
@@ -22,8 +17,8 @@ public class UserEvent extends Event {
      */
     private User user;
 
-    public UserEvent(Integer id, Long timestamp, Bot bot, User user) {
-        super(id, timestamp, bot);
+    public UserEvent(Integer id, Long timestamp, User user) {
+        super(id, timestamp);
         this.user = user;
     }
 
@@ -31,32 +26,4 @@ public class UserEvent extends Event {
         this.user = new User(name, id, avatar, isBot);
     }
 
-    @Data
-    @AllArgsConstructor
-    @NoArgsConstructor
-    public class User {
-        /**
-         * QQ 号
-         */
-        private String id;
-
-        /**
-         * 昵称
-         */
-        private String name;
-
-        /**
-         * 头像
-         */
-        private String avatar;
-
-        /**
-         * 是否为机器人(null 表示未知)
-         */
-        private Boolean isBot;
-
-        public List<MessageEntity> createMessage(String content) {
-            return MessageApi.createMessage("private:" + id, content, "chronocat", bot.getId());
-        }
-    }
 }

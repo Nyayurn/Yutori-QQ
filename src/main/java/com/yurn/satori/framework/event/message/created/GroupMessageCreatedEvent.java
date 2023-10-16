@@ -1,8 +1,9 @@
 package com.yurn.satori.framework.event.message.created;
 
-import com.yurn.satori.framework.entity.event.Bot;
+import com.yurn.satori.framework.entity.event.Channel;
 import com.yurn.satori.framework.entity.event.Guild;
 import com.yurn.satori.framework.entity.event.Message;
+import com.yurn.satori.framework.entity.event.User;
 import com.yurn.satori.framework.message.element.BaseMessageElement;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -23,13 +24,13 @@ public class GroupMessageCreatedEvent extends MessageCreatedEvent {
     protected Guild guild;
 
     /**
-     * 群成员信息
+     * 群成员卡片
      */
     protected String senderCard;
 
-    public GroupMessageCreatedEvent(Integer id, Long timestamp, Bot bot, User user, Message message, Channel channel,
+    public GroupMessageCreatedEvent(Integer id, Long timestamp, User user, Message message, Channel channel,
                                     List<BaseMessageElement> chain, Guild guild, String senderCard) {
-        super(id, timestamp, bot, user, message, channel, chain);
+        super(id, timestamp, user, message, channel, chain);
         this.guild = guild;
         this.senderCard = senderCard;
     }
