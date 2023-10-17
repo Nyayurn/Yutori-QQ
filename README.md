@@ -35,16 +35,16 @@
     <dependency>
         <groupId>com.yurn</groupId>
         <artifactId>YurnQbotFramework</artifactId>
-        <version>0.0.4</version>
+        <version>0.0.5</version>
         <scope>system</scope>
-        <systemPath>${project.basedir}/lib/YurnQbotFramework-0.0.4.jar</systemPath>
+        <systemPath>${project.basedir}/lib/YurnQbotFramework-0.0.5.jar</systemPath>
     </dependency>
     <dependency>
         <groupId>com.yurn</groupId>
         <artifactId>YurnSatoriFramework</artifactId>
-        <version>0.0.4-Fix</version>
+        <version>0.0.5</version>
         <scope>system</scope>
-        <systemPath>${project.basedir}/lib/YurnSatoriFramework-0.0.4-Fix.jar</systemPath>
+        <systemPath>${project.basedir}/lib/YurnSatoriFramework-0.0.5.jar</systemPath>
     </dependency>
     <!-- Http 和 WebSocket 所需依赖 -->
     <dependency>
@@ -87,8 +87,8 @@ public class Main {
     }
 
     private void run() {
-        // 初始化核心启动类, 并运行
-        //new Boot("127.0.0.1:5500", listenerContainer).run()
+        // 初始化核心启动类, 并运行, platform参数可缺省, 默认"chronocat"
+        //new Boot("red", "127.0.0.1:5500", "token", listenerContainer).run()
         new Boot("127.0.0.1:5500", "token", listenerContainer).run();
     }
     

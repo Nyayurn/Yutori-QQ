@@ -15,9 +15,11 @@ import com.yurn.satori.sdk.entity.events.UserEvents;
 public class DispatcherUserListener {
     private final PropertiesEntity properties;
     private final EventListenerContainer listenerContainer;
+    private final String platform;
 
-    public DispatcherUserListener(PropertiesEntity properties, ListenerContainer listenerContainer,
+    public DispatcherUserListener(String platform, PropertiesEntity properties, ListenerContainer listenerContainer,
                                   EventListenerContainer eventListenerContainer) {
+        this.platform = platform;
         this.properties = properties;
         this.listenerContainer = eventListenerContainer;
         listenerContainer.addOnEventListener(this::onEvent);
@@ -26,7 +28,7 @@ public class DispatcherUserListener {
     private void onEvent(EventEntity event) {
         if (event.getType().equals(UserEvents.FRIEND_REQUEST)) {
             FriendRequestEvent newEvent = new FriendRequestEvent();
-            MessageApi messageApi = new MessageApi("chronocat", event.getSelfId(), properties);
+            MessageApi messageApi = new MessageApi(platform, event.getSelfId(), properties);
             listenerContainer.runOnFriendRequestListeners(new Bot(messageApi), newEvent);
         }
     }

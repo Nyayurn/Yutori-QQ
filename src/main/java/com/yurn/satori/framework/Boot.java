@@ -5,7 +5,6 @@ import com.yurn.satori.framework.listener.message.created.DispatcherMessageCreat
 import com.yurn.satori.framework.listener.user.DispatcherUserListener;
 import com.yurn.satori.sdk.ListenerContainer;
 import com.yurn.satori.sdk.MyWebSocketClient;
-import com.yurn.satori.sdk.api.MessageApi;
 import com.yurn.satori.sdk.entity.PropertiesEntity;
 import lombok.Getter;
 import okhttp3.OkHttpClient;
@@ -21,14 +20,14 @@ public class Boot implements Runnable {
     private final ListenerContainer listenerContainer = new ListenerContainer();
     private final PropertiesEntity properties;
 
-    public Boot(String address, EventListenerContainer eventListenerContainer) {
-        this(address, null, eventListenerContainer);
+    public Boot(String address, String token, EventListenerContainer eventListenerContainer) {
+        this("chronocat", address, token, eventListenerContainer);
     }
 
-    public Boot(String address, String token, EventListenerContainer eventListenerContainer) {
+    public Boot(String platform, String address, String token, EventListenerContainer eventListenerContainer) {
         properties = new PropertiesEntity(address, token);
-        new DispatcherUserListener(properties, listenerContainer, eventListenerContainer);
-        new DispatcherMessageCreatedListener(properties, listenerContainer, eventListenerContainer);
+        new DispatcherUserListener(platform, properties, listenerContainer, eventListenerContainer);
+        new DispatcherMessageCreatedListener(platform, properties, listenerContainer, eventListenerContainer);
     }
 
     @Override

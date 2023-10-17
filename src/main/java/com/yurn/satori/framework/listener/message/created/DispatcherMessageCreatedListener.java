@@ -32,9 +32,11 @@ import java.util.List;
 public class DispatcherMessageCreatedListener {
     private final PropertiesEntity properties;
     private final EventListenerContainer listenerContainer;
+    private final String platform;
 
-    public DispatcherMessageCreatedListener(PropertiesEntity properties, ListenerContainer listenerContainer,
+    public DispatcherMessageCreatedListener(String platform, PropertiesEntity properties, ListenerContainer listenerContainer,
                                             EventListenerContainer eventListenerContainer) {
+        this.platform = platform;
         this.properties = properties;
         this.listenerContainer = eventListenerContainer;
         listenerContainer.addOnEventListener(event -> {
@@ -45,7 +47,7 @@ public class DispatcherMessageCreatedListener {
     }
 
     private void onEvent(EventEntity event) {
-        MessageApi messageApi = new MessageApi("chronocat", event.getSelfId(), properties);
+        MessageApi messageApi = new MessageApi(platform, event.getSelfId(), properties);
         Bot bot = new Bot(messageApi);
         switch (event.getChannel().getType()) {
             case ChannelEntity.TEXT -> {
