@@ -25,50 +25,19 @@
 
 ### Maven
 
-- 在项目目录下新建 lib 文件夹
-- 下载 jar 包并将其丢进 lib 文件夹内
-- 配置 pom.xml
-
 ```xml
 <dependencies>
     <!-- 核心框架 -->
     <dependency>
         <groupId>com.yurn</groupId>
         <artifactId>YurnQbotFramework</artifactId>
-        <version>0.0.5</version>
-        <scope>system</scope>
-        <systemPath>${project.basedir}/lib/YurnQbotFramework-0.0.5.jar</systemPath>
-    </dependency>
-    <dependency>
-        <groupId>com.yurn</groupId>
-        <artifactId>YurnSatoriFramework</artifactId>
-        <version>0.0.5</version>
-        <scope>system</scope>
-        <systemPath>${project.basedir}/lib/YurnSatoriFramework-0.0.5.jar</systemPath>
-    </dependency>
-    <!-- Http 和 WebSocket 所需依赖 -->
-    <dependency>
-        <artifactId>okhttp</artifactId>
-        <groupId>com.squareup.okhttp3</groupId>
-        <version>4.10.0</version>
+        <version>0.0.6</version>
     </dependency>
     <!-- 日志系统(可替换为其他slf4j实现) -->
     <dependency>
         <groupId>ch.qos.logback</groupId>
         <artifactId>logback-classic</artifactId>
         <version>1.4.11</version>
-    </dependency>
-    <!-- JSON 序列化/反序列化 -->
-    <dependency>
-        <groupId>com.alibaba.fastjson2</groupId>
-        <artifactId>fastjson2</artifactId>
-        <version>2.0.40</version>
-    </dependency>
-    <!-- HTML 解析 -->
-    <dependency>
-        <groupId>org.jsoup</groupId>
-        <artifactId>jsoup</artifactId>
-        <version>1.16.1</version>
     </dependency>
 </dependencies>
 ```

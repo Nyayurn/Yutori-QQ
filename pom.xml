@@ -3,9 +3,12 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.yurn</groupId>
+	<groupId>io.github.nyayurn</groupId>
 	<artifactId>YurnQbotFramework</artifactId>
-	<version>0.0.5</version>
+	<version>0.0.6</version>
+	<name>Yurn's Java QQ Satori bot framework</name>
+	<description>基于 Satori 协议和 YurnSatoriFramework 的 Java QQ 机器人开发框架</description>
+	<url>https://github.com/Nyayurn/YurnQbotFramework</url>
 
 	<properties>
 		<maven.compiler.source>17</maven.compiler.source>
@@ -13,11 +16,35 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
+	<licenses>
+		<license>
+			<name>木兰宽松许可证, 第2版</name>
+			<url>http://license.coscl.org.cn/MulanPSL2</url>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<id>Nyayurn</id>
+			<name>Yurn</name>
+			<email>ChenDSakura@163.com</email>
+			<roles>
+				<role>Developer</role>
+			</roles>
+			<timezone>+8</timezone>
+		</developer>
+	</developers>
+
+	<scm>
+		<url>https://github.com/Nyayurn/YurnQbotFramework</url>
+		<connection>https://github.com/Nyayurn/YurnQbotFramework.git</connection>
+	</scm>
+
 	<dependencies>
 		<dependency>
-			<groupId>com.yurn</groupId>
+			<groupId>io.github.nyayurn</groupId>
 			<artifactId>YurnSatoriSdk</artifactId>
-			<version>0.0.5</version>
+			<version>0.0.6</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jsoup</groupId>
@@ -38,4 +65,71 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.sonatype.plugins</groupId>
+				<artifactId>nexus-staging-maven-plugin</artifactId>
+				<version>1.6.13</version>
+				<extensions>true</extensions>
+				<configuration>
+					<serverId>ossrh</serverId>
+					<nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+					<autoReleaseAfterClose>true</autoReleaseAfterClose>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>3.3.0</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar-no-fork</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.5.0</version>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<version>3.1.0</version>
+				<executions>
+					<execution>
+						<id>sign-artifacts</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+		<repository>
+			<id>ossrh</id>
+			<url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
+	</distributionManagement>
 </project>

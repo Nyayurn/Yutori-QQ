@@ -1,9 +1,21 @@
+/*
+Copyright (c) 2023 Yurn
+YurnQbotFramework is licensed under Mulan PSL v2.
+You can use this software according to the terms and conditions of the Mulan PSL v2.
+You may obtain a copy of Mulan PSL v2 at:
+         http://license.coscl.org.cn/MulanPSL2
+THIS SOFTWARE IS PROVIDED ON AN "AS IS" BASIS, WITHOUT WARRANTIES OF ANY KIND,
+EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO NON-INFRINGEMENT,
+MERCHANTABILITY OR FIT FOR A PARTICULAR PURPOSE.
+See the Mulan PSL v2 for more details.
+ */
+
 package com.yurn.satori.framework.listener.message.created;
 
 import com.yurn.satori.framework.entity.event.Bot;
 import com.yurn.satori.framework.event.message.created.GroupMessageCreatedEvent;
-import com.yurn.satori.framework.event.message.created.PrivateMessageCreatedEvent;
 import com.yurn.satori.framework.event.message.created.MessageCreatedEvent;
+import com.yurn.satori.framework.event.message.created.PrivateMessageCreatedEvent;
 import com.yurn.satori.framework.listener.EventListenerContainer;
 import com.yurn.satori.framework.message.element.BaseMessageElement;
 import com.yurn.satori.framework.message.element.basic.AtElement;
@@ -104,13 +116,18 @@ public class DispatcherMessageCreatedListener {
                             element.hasAttr("cache"),
                             element.attr("timeout"),
                             element.attr("chrono-unsafe-filename")));
-                    case "img" -> msgChain.add(new ImgElement(element.attr("src"),
-                            element.hasAttr("cache"),
-                            element.attr("timeout"),
-                            Long.parseLong(element.attr("width")),
-                            Long.parseLong(element.attr("height")),
-                            element.hasAttr("chrono-unsafe-isemoji"),
-                            element.attr("chrono-unsafe-filepath")));
+                    case "img" -> {
+                        String widthString = element.attr("width");
+                        Long width = widthString.isEmpty() ? null : Long.parseLong(widthString);
+                        String heightWidth = element.attr("height");
+                        Long height = heightWidth.isEmpty() ? null : Long.parseLong(heightWidth);
+                        msgChain.add(new ImgElement(element.attr("src"),
+                                element.hasAttr("cache"),
+                                element.attr("timeout"),
+                                width, height,
+                                element.hasAttr("chrono-unsafe-isemoji"),
+                                element.attr("chrono-unsafe-filepath")));
+                    }
                     case "video" -> msgChain.add(new VideoElement(element.attr("src"),
                             element.hasAttr("cache"),
                             element.attr("timeout")));
