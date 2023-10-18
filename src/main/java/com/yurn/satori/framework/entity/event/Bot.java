@@ -36,19 +36,15 @@ public class Bot {
     }
 
     public List<MessageEntity> createMessage(Channel channel, String content) {
-        if (channel.getType().equals(0)) {
-            return createGroupMessage(channel.getId(), content);
-        } else {
-            return createPrivateMessage(channel.getId(), content);
-        }
+        return createMessage(channel.getId(), content);
     }
 
     public List<MessageEntity> createMessage(Guild guild, String content) {
-        return createGroupMessage(guild.getId(), content);
+        return createMessage(guild.getId(), content);
     }
 
     public List<MessageEntity> createMessage(User user, String content) {
-        return createPrivateMessage(user.getId(), content);
+        return createMessage(user.getId(), content);
     }
 
     public List<MessageEntity> createMessage(String id, String content) {
