@@ -31,7 +31,7 @@
     <dependency>
         <groupId>com.yurn</groupId>
         <artifactId>YurnQbotFramework</artifactId>
-        <version>0.0.6</version>
+        <version>0.0.6-Fix</version>
     </dependency>
     <!-- 日志系统(可替换为其他slf4j实现) -->
     <dependency>
