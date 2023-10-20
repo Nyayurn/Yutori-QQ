@@ -27,17 +27,10 @@
 
 ```xml
 <dependencies>
-    <!-- 核心框架 -->
     <dependency>
         <groupId>com.yurn</groupId>
         <artifactId>YurnQbotFramework</artifactId>
-        <version>0.0.6-Fix</version>
-    </dependency>
-    <!-- 日志系统(可替换为其他slf4j实现) -->
-    <dependency>
-        <groupId>ch.qos.logback</groupId>
-        <artifactId>logback-classic</artifactId>
-        <version>1.4.11</version>
+        <version>0.0.7</version>
     </dependency>
 </dependencies>
 ```

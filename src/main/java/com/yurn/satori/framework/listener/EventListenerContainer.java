@@ -16,10 +16,16 @@ import com.yurn.satori.framework.entity.event.Bot;
 import com.yurn.satori.framework.event.message.created.GroupMessageCreatedEvent;
 import com.yurn.satori.framework.event.message.created.MessageCreatedEvent;
 import com.yurn.satori.framework.event.message.created.PrivateMessageCreatedEvent;
+import com.yurn.satori.framework.event.message.deleted.GroupMessageDeletedEvent;
+import com.yurn.satori.framework.event.message.deleted.MessageDeletedEvent;
+import com.yurn.satori.framework.event.message.deleted.PrivateMessageDeletedEvent;
 import com.yurn.satori.framework.event.user.FriendRequestEvent;
 import com.yurn.satori.framework.listener.message.created.GroupMessageCreatedListener;
 import com.yurn.satori.framework.listener.message.created.PrivateMessageCreatedListener;
 import com.yurn.satori.framework.listener.message.created.MessageCreatedListener;
+import com.yurn.satori.framework.listener.message.deleted.GroupMessageDeletedListener;
+import com.yurn.satori.framework.listener.message.deleted.MessageDeletedListener;
+import com.yurn.satori.framework.listener.message.deleted.PrivateMessageDeletedListener;
 import com.yurn.satori.framework.listener.user.FriendRequestListener;
 import lombok.Data;
 
@@ -34,6 +40,9 @@ public class EventListenerContainer {
     public final List<MessageCreatedListener> onMessageCreatedListenerDelegate = new ArrayList<>();
     public final List<PrivateMessageCreatedListener> onPrivateMessageCreatedListenerDelegate = new ArrayList<>();
     public final List<GroupMessageCreatedListener> onGroupMessageCreatedListenerDelegate = new ArrayList<>();
+    public final List<MessageDeletedListener> onMessageDeletedListenerDelegate = new ArrayList<>();
+    public final List<PrivateMessageDeletedListener> onPrivateMessageDeletedListenerDelegate = new ArrayList<>();
+    public final List<GroupMessageDeletedListener> onGroupMessageDeletedListenerDelegate = new ArrayList<>();
     public final List<FriendRequestListener> onFriendRequestListenerDelegate = new ArrayList<>();
 
     public void addOnMessageCreatedListener(MessageCreatedListener listener) {
@@ -46,6 +55,18 @@ public class EventListenerContainer {
 
     public void addOnGroupMessageCreatedListener(GroupMessageCreatedListener listener) {
         onGroupMessageCreatedListenerDelegate.add(listener);
+    }
+
+    public void addOnMessageDeletedListener(MessageDeletedListener listener) {
+        onMessageDeletedListenerDelegate.add(listener);
+    }
+
+    public void addOnPrivateMessageDeletedListener(PrivateMessageDeletedListener listener) {
+        onPrivateMessageDeletedListenerDelegate.add(listener);
+    }
+
+    public void addOnGroupMessageDeletedListener(GroupMessageDeletedListener listener) {
+        onGroupMessageDeletedListenerDelegate.add(listener);
     }
 
     public void addOnFriendRequestListener(FriendRequestListener listener) {
@@ -66,6 +87,24 @@ public class EventListenerContainer {
 
     public void runOnGroupMessageCreatedListeners(Bot bot, GroupMessageCreatedEvent event, String msg) {
         for (var listener : onGroupMessageCreatedListenerDelegate) {
+            listener.onMessageCreated(bot, event, msg);
+        }
+    }
+
+    public void runOnMessageDeletedListeners(Bot bot, MessageDeletedEvent event, String msg) {
+        for (var listener : onMessageDeletedListenerDelegate) {
+            listener.onMessageCreated(bot, event, msg);
+        }
+    }
+
+    public void runOnPrivateMessageDeletedListeners(Bot bot, PrivateMessageDeletedEvent event, String msg) {
+        for (var listener : onPrivateMessageDeletedListenerDelegate) {
+            listener.onMessageCreated(bot, event, msg);
+        }
+    }
+
+    public void runOnGroupMessageDeletedListeners(Bot bot, GroupMessageDeletedEvent event, String msg) {
+        for (var listener : onGroupMessageDeletedListenerDelegate) {
             listener.onMessageCreated(bot, event, msg);
         }
     }

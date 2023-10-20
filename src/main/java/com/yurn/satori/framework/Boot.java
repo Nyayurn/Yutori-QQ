@@ -14,19 +14,20 @@ package com.yurn.satori.framework;
 
 import com.yurn.satori.framework.listener.EventListenerContainer;
 import com.yurn.satori.framework.listener.message.created.DispatcherMessageCreatedListener;
+import com.yurn.satori.framework.listener.message.deleted.DispatcherMessageDeletedListener;
 import com.yurn.satori.framework.listener.user.DispatcherUserListener;
 import com.yurn.satori.sdk.ListenerContainer;
 import com.yurn.satori.sdk.MyWebSocketClient;
 import com.yurn.satori.sdk.entity.PropertiesEntity;
 import lombok.Getter;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
+import lombok.extern.slf4j.Slf4j;
 
-import java.util.concurrent.TimeUnit;
+import java.net.URISyntaxException;
 
 /**
  * @author Yurn
  */
+@Slf4j
 @Getter
 public class Boot implements Runnable {
     private final ListenerContainer listenerContainer = new ListenerContainer();
@@ -40,19 +41,16 @@ public class Boot implements Runnable {
         properties = new PropertiesEntity(address, token);
         new DispatcherUserListener(platform, properties, listenerContainer, eventListenerContainer);
         new DispatcherMessageCreatedListener(platform, properties, listenerContainer, eventListenerContainer);
+        new DispatcherMessageDeletedListener(platform, properties, listenerContainer, eventListenerContainer);
     }
 
     @Override
     public void run() {
-        // 构造一个 HTTP 客户端用于进行 WebSocket 连接
-        OkHttpClient client = new OkHttpClient.Builder()
-                .readTimeout(3, TimeUnit.SECONDS)
-                .writeTimeout(3, TimeUnit.SECONDS)
-                .connectTimeout(3, TimeUnit.SECONDS)
-                .build();
-        // 构造一个 Request 请求
-        Request request = new Request.Builder().get().url("ws://" + properties.getAddress() + "/v1/events").build();
-        // 新建一个 WebSocket 连接
-        client.newWebSocket(request, new MyWebSocketClient(properties.getToken(), listenerContainer));
+        try {
+            // 新建一个 WebSocket 连接
+            new MyWebSocketClient(properties.getAddress(), properties.getToken(), listenerContainer).connect();
+        } catch (URISyntaxException e) {
+            log.error(e.getLocalizedMessage());
+        }
     }
 }
