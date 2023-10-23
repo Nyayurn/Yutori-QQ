@@ -28,9 +28,9 @@
 ```xml
 <dependencies>
     <dependency>
-        <groupId>com.yurn</groupId>
+        <groupId>io.github.nyayurn</groupId>
         <artifactId>YurnQbotFramework</artifactId>
-        <version>0.0.7</version>
+        <version>0.0.8</version>
     </dependency>
 </dependencies>
 ```

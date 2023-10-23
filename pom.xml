@@ -5,7 +5,7 @@
 
 	<groupId>io.github.nyayurn</groupId>
 	<artifactId>YurnQbotFramework</artifactId>
-	<version>0.0.7</version>
+	<version>0.0.8</version>
 	<name>Yurn's Java QQ Satori bot framework</name>
 	<description>基于 Satori 协议和 YurnSatoriFramework 的 Java QQ 机器人开发框架</description>
 	<url>https://github.com/Nyayurn/YurnQbotFramework</url>
