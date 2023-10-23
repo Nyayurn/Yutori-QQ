@@ -2,7 +2,7 @@
 
 # YurnQbotFramework
 
-基于 [Satori](https://satori.js.org/zh-CN/) 协议和 [YurnSatoriFramework](https://github.com/Nyayurn/YurnSatoriFramework) 的 Java QQ 机器人开发框架
+基于 [Satori](https://satori.js.org/zh-CN/) 协议和 [YurnSatoriSdk](https://github.com/Nyayurn/YurnSatoriSdk) 的 Java QQ 机器人开发框架
 
 <img src="https://img.shields.io/badge/JDK-17+-brightgreen.svg?style=flat-square" alt="jdk-version">
 
