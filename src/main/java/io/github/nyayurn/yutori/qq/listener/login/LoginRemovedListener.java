@@ -1,3 +1,4 @@
+/*
 Copyright (c) 2023 Yurn
 yutori-qq is licensed under Mulan PSL v2.
 You can use this software according to the terms and conditions of the Mulan PSL v2.
@@ -7,3 +8,20 @@ THIS SOFTWARE IS PROVIDED ON AN "AS IS" BASIS, WITHOUT WARRANTIES OF ANY KIND,
 EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO NON-INFRINGEMENT,
 MERCHANTABILITY OR FIT FOR A PARTICULAR PURPOSE.
 See the Mulan PSL v2 for more details.
+ */
+
+package io.github.nyayurn.yutori.qq.listener.login;
+
+import io.github.nyayurn.yutori.qq.entity.event.Bot;
+
+/**
+ * @author Yurn
+ */
+public interface LoginRemovedListener {
+    /**
+     * 触发事件
+     *
+     * @param bot 机器人信息
+     */
+    void onEvent(Bot bot);
+}

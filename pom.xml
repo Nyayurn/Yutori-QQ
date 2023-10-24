@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>io.github.nyayurn</groupId>
-	<artifactId>YurnQbotFramework</artifactId>
-	<version>0.0.8</version>
-	<name>Yurn's Java QQ Satori bot framework</name>
-	<description>基于 Satori 协议和 YurnSatoriFramework 的 Java QQ 机器人开发框架</description>
-	<url>https://github.com/Nyayurn/YurnQbotFramework</url>
+	<artifactId>yutori-qq</artifactId>
+	<version>0.0.9</version>
+	<name>Yutori-QQ</name>
+	<description>基于 Satori 协议和 Yutori 的 Java QQ 机器人开发框架</description>
+	<url>https://github.com/Nyayurn/Yutori-QQ</url>
 
 	<properties>
 		<maven.compiler.source>17</maven.compiler.source>
@@ -36,15 +36,15 @@
 	</developers>
 
 	<scm>
-		<url>https://github.com/Nyayurn/YurnQbotFramework</url>
-		<connection>https://github.com/Nyayurn/YurnQbotFramework.git</connection>
+		<url>https://github.com/Nyayurn/Yutori-QQ</url>
+		<connection>https://github.com/Nyayurn/Yutori-QQ.git</connection>
 	</scm>
 
 	<dependencies>
 		<dependency>
 			<groupId>io.github.nyayurn</groupId>
-			<artifactId>YurnSatoriSdk</artifactId>
-			<version>0.0.7</version>
+			<artifactId>yutori</artifactId>
+			<version>0.0.9-Fix</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jsoup</groupId>
