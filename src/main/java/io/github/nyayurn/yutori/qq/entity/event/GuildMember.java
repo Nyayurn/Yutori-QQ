@@ -17,6 +17,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Optional;
+
 /**
  * 群组成员
  *
@@ -45,6 +47,8 @@ public class GuildMember {
     private Long joinedAt;
 
     public static GuildMember parse(EventEntity event, User user) {
-        return new GuildMember(user, event.getMember().getName(), event.getMember().getJoinedAt());
+        return Optional.ofNullable(event.getMember())
+                .map(guildMemberEntity -> new GuildMember(user, guildMemberEntity.getName(), event.getMember().getJoinedAt()))
+                .orElseGet(() -> new GuildMember(user, event.getUser().getName(), null));
     }
 }
