@@ -32,9 +32,10 @@ import java.net.URISyntaxException;
  */
 @Slf4j
 @Getter
-public class Boot implements Runnable {
+public class Boot {
     private final ListenerContainer listenerContainer = new ListenerContainer();
     private final PropertiesEntity properties;
+    private MyWebSocketClient myWebSocketClient;
 
     public Boot(String address, String token, EventListenerContainer eventListenerContainer) {
         this("chronocat", address, token, eventListenerContainer);
@@ -50,13 +51,16 @@ public class Boot implements Runnable {
         new DispatcherUserListener(platform, properties, listenerContainer, eventListenerContainer);
     }
 
-    @Override
     public void run() {
         try {
-            // 新建一个 WebSocket 连接
-            new MyWebSocketClient(properties.getAddress(), properties.getToken(), listenerContainer).connect();
+            myWebSocketClient = new MyWebSocketClient(properties.getAddress(), properties.getToken(), listenerContainer);
+            myWebSocketClient.connect();
         } catch (URISyntaxException e) {
             log.error(e.getLocalizedMessage());
         }
+    }
+
+    public void cancel() {
+        myWebSocketClient.close();
     }
 }

@@ -5,7 +5,7 @@
 
 	<groupId>io.github.nyayurn</groupId>
 	<artifactId>yutori-qq</artifactId>
-	<version>0.0.9</version>
+	<version>0.1.0</version>
 	<name>Yutori-QQ</name>
 	<description>基于 Satori 协议和 Yutori 的 Java QQ 机器人开发框架</description>
 	<url>https://github.com/Nyayurn/Yutori-QQ</url>
@@ -44,7 +44,7 @@
 		<dependency>
 			<groupId>io.github.nyayurn</groupId>
 			<artifactId>yutori</artifactId>
-			<version>0.0.9-Fix</version>
+			<version>0.1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jsoup</groupId>
