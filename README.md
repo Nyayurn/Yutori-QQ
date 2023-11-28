@@ -4,6 +4,8 @@
 
 基于 [Satori](https://satori.js.org/zh-CN/) 协议和 [Yutori](https://github.com/Nyayurn/Yutori) 的 Java QQ 机器人开发框架
 
+该项目最终版本使用 [yutori:0.1.0](https://central.sonatype.com/artifact/io.github.nyayurn/yutori/0.1.0), [Yutori 新版本](https://central.sonatype.com/artifact/io.github.nyayurn/yutori) 已能替代该项目
+
 <img src="https://img.shields.io/badge/JDK-17+-brightgreen.svg?style=flat-square" alt="jdk-version">
 
 </div>
