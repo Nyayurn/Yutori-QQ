@@ -2,9 +2,9 @@
 
 # Yutori-QQ
 
-基于 [Satori](https://satori.js.org/zh-CN/) 协议和 [Yutori](https://github.com/Nyayurn/Yutori) 的 Java QQ 机器人开发框架
+基于 [Satori](https://satori.js.org/zh-CN/) 协议和 [Yutori 0.1.0](https://github.com/Nyayurn/Yutori/tree/0.1.0) 的 Java QQ 机器人开发框架
 
-该项目最终版本使用 [yutori:0.1.0](https://central.sonatype.com/artifact/io.github.nyayurn/yutori/0.1.0), [Yutori 新版本](https://central.sonatype.com/artifact/io.github.nyayurn/yutori) 已能替代该项目
+[Yutori 新版本](https://github.com/Nyayurn/Yutori) 已能替代该项目
 
 <img src="https://img.shields.io/badge/JDK-17+-brightgreen.svg?style=flat-square" alt="jdk-version">
 
@@ -12,7 +12,7 @@
 
 # 快速开始
 
-1. 创建一个 Maven 项目
+1. 创建一个 Maven 或 Gradle 项目
 2. 依赖引入
 3. 基本配置
 4. 进阶
@@ -30,6 +30,12 @@
         <version>0.1.0</version>
     </dependency>
 </dependencies>
+```
+
+### Gradle
+
+```kotlin
+implementation("io.github.nyayurn:yutori-qq:0.1.0")
 ```
 
 ## 基本配置
